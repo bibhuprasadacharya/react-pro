@@ -1,0 +1,44 @@
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.user-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.user-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  width: 200px;
+}
+
+.user-details-container {
+  margin-top: 20px;
+}
+
+.user-details {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.user-posts,
+.user-albums {
+  margin-top: 20px;
+}
+
+.user-posts h2,
+.user-albums h2 {
+  margin-bottom: 10px;
+}
+
+.user-posts div,
+.user-albums div {
+  margin-bottom: 15px;
+}
+
