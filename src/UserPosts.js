@@ -1,43 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// UserPosts.js
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import "./Posts.css"; // Import CSS for styling
 
-const UserPosts = ({ userId }) => {
-  const [userPosts, setUserPosts] = useState([]);
+const UserPosts = () => {
+  const { userId } = useParams();
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const fetchUserPosts = async () => {
+    const fetchPosts = async () => {
       try {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`);
-        const data = await response.json();
-        setUserPosts(data);
+        const response = await axios.get(
+          `https://jsonplaceholder.typicode.com/users/${userId}/posts`
+        );
+        setPosts(response.data);
       } catch (error) {
-        console.error('Error fetching user posts:', error);
+        console.error("Error fetching posts:", error);
       }
     };
 
-    fetchUserPosts();
+    fetchPosts();
   }, [userId]);
 
   return (
     <div className="user-posts">
       <h2>User Posts</h2>
-      {userPosts.map(post => (
-        <div key={post.id}>
-          <h3>{post.title}</h3>
-          <p>{post.body}</p>
-        </div>
-      ))}
+      <div className="post-grid">
+        {posts.map((post) => (
+          <div key={post.id} className="post-card">
+            <h3>{post.title}</h3>
+            <p>{post.body}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
-const UserPosts = ({ userId }) => {
-    return (
-      <div className="user-posts">
-        <h2>User Posts</h2>
-        <p>User ID: {userId}</p>
-        <Link to="/">Back to User Card</Link>
-      </div>
-    );
-  };
 
 export default UserPosts;

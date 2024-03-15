@@ -1,43 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// UserAlbums.js
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import "./Albums.css"; // Import CSS for styling
 
-const UserAlbums = ({ userId }) => {
-  const [userAlbums, setUserAlbums] = useState([]);
+const UserAlbums = () => {
+  const { userId } = useParams();
+  const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
-    const fetchUserAlbums = async () => {
+    const fetchAlbums = async () => {
       try {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}/albums`);
-        const data = await response.json();
-        setUserAlbums(data);
+        const response = await axios.get(
+          `https://jsonplaceholder.typicode.com/users/${userId}/albums`
+        );
+        setAlbums(response.data);
       } catch (error) {
-        console.error('Error fetching user albums:', error);
+        console.error("Error fetching albums:", error);
       }
     };
 
-    fetchUserAlbums();
+    fetchAlbums();
   }, [userId]);
 
   return (
     <div className="user-albums">
       <h2>User Albums</h2>
-      {userAlbums.map(album => (
-        <div key={album.id}>
-          <h3>{album.title}</h3>
-        </div>
-      ))}
+      <div className="album-grid">
+        {albums.map((album) => (
+          <div key={album.id} className="album-card">
+            <h3>{album.title}</h3>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
-const UserAlbums = ({ userId }) => {
-    return (
-      <div className="user-albums">
-        <h2>User Albums</h2>
-        <p>User ID: {userId}</p>
-        <Link to="/">Back to User Card</Link>
-      </div>
-    );
-  };
-  
 
 export default UserAlbums;

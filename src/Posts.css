@@ -1,0 +1,25 @@
+/* Posts.css */
+.post-container {
+  margin-top: 20px;
+}
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+.post-card {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.post-card h3 {
+  margin: 0;
+}
+
+.post-card p {
+  margin-top: 5px;
+}

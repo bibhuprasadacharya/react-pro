@@ -1,0 +1,16 @@
+/* UserDetails.css */
+.user-details {
+  font-family: Arial, sans-serif;
+}
+
+.user-details h2 {
+  color: #333;
+}
+
+.user-details p {
+  margin: 5px 0;
+}
+
+.user-details .loading {
+  color: #007bff;
+}

@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import axios from "axios";
+import "./UserDetails.css"; // Import CSS for styling
 
-const UserDetails = ({ userId }) => {
+const UserDetails = () => {
+  const { userId } = useParams();
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
-        const data = await response.json();
-        setUserData(data);
+        const response = await axios.get(
+          `https://jsonplaceholder.typicode.com/users/${userId}`
+        );
+        setUserData(response.data);
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error("Error fetching user data:", error);
       }
     };
 
@@ -28,6 +32,15 @@ const UserDetails = ({ userId }) => {
           <p>City: {userData.address.city}</p>
           <p>Phone: {userData.phone}</p>
           <p>Company: {userData.company.name}</p>
+          {/* Link to view posts */}
+          <Link to={`/posts/${userId}`} className="btn">
+            View Posts
+          </Link>
+          <br />
+          {/* Link to view albums */}
+          <Link to={`/albums/${userId}`} className="btn">
+            View Albums
+          </Link>
         </div>
       ) : (
         <div>Loading...</div>
@@ -35,15 +48,5 @@ const UserDetails = ({ userId }) => {
     </div>
   );
 };
-const UserDetails = ({ userId }) => {
-    return (
-      <div className="user-details">
-        <h2>User Details</h2>
-        <p>User ID: {userId}</p>
-        <Link to="/">Back to User Card</Link>
-      </div>
-    );
-  };
-  
 
 export default UserDetails;

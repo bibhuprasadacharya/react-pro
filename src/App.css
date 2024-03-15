@@ -42,3 +42,29 @@
   margin-bottom: 15px;
 }
 
+.user-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.user-card h3 {
+  margin-top: 0;
+}
+
+.user-card p {
+  margin: 5px 0;
+}
+
+.user-card a {
+  color: #007bff;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.user-card a:hover {
+  text-decoration: underline;
+}

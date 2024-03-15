@@ -1,0 +1,26 @@
+/* UserCard.css */
+.user-list {
+  font-family: Arial, sans-serif;
+}
+
+.user-list h1 {
+  color: #333;
+}
+
+.user-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.user-list li {
+  margin-bottom: 10px;
+}
+
+.user-list li a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.user-list li a:hover {
+  text-decoration: underline;
+}

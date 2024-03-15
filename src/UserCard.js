@@ -1,49 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import "./UserCard.css"; // Import CSS for styling
 
-const UserCard = ({ userId }) => {
-  const [userData, setUserData] = useState(null);
+const UserCard = () => {
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchUsers = async () => {
       try {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
-        const data = await response.json();
-        setUserData(data);
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/users"
+        );
+        setUsers(response.data);
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error("Error fetching users:", error);
       }
     };
 
-    fetchUserData();
-  }, [userId]);
+    fetchUsers();
+  }, []);
 
   return (
-    <div className="user-card">
-      {userData ? (
-        <div>
-          <h3>{userData.name}</h3>
-          <p>Username: {userData.username}</p>
-          <p>Email: {userData.email}</p>
-          <p>City: {userData.address.city}</p>
-          <p>Phone: {userData.phone}</p>
-          <p>Company: {userData.company.name}</p>
-        </div>
-      ) : (
-        <div>Loading...</div>
-      )}
+    <div className="user-list">
+      <h1>User List</h1>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>
+            <Link to={`/details/${user.id}`}>{user.name}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
-const UserCard = ({ userId }) => {
-    return (
-      <div className="user-card">
-        <h3>User Card</h3>
-        <Link to={`/details/${userId}`}>Details</Link>
-        <Link to={`/posts/${userId}`}>Posts</Link>
-        <Link to={`/albums/${userId}`}>Albums</Link>
-      </div>
-    );
-  };
 
 export default UserCard;
