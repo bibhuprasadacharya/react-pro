@@ -4,6 +4,7 @@ import UserCard from "./UserCard";
 import UserDetails from "./UserDetails";
 import UserPosts from "./UserPosts";
 import UserAlbums from "./UserAlbums";
+import './App.css';
 
 const App = () => {
   return (
